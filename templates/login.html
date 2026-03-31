@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Login | MockPrep India{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        <div class="auth-card">
+            <span class="eyebrow">Welcome back</span>
+            <h1 class="h2 mb-3">Login to continue</h1>
+            <form method="post" class="row g-3">
+                <div class="col-12"><label class="form-label">Email</label><input type="email" name="email" class="form-control form-control-lg" required></div>
+                <div class="col-12"><label class="form-label">Password</label><input type="password" name="password" class="form-control form-control-lg" required></div>
+                <div class="col-12 d-grid"><button type="submit" class="btn btn-primary btn-lg">Login</button></div>
+            </form>
+            <div class="demo-box mt-4"><strong>Demo login</strong><p class="mb-0">Email: demo@mockprep.local | Password: password123</p></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

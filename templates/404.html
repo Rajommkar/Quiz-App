@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Not Found | MockPrep India{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="hero-card text-center">
+            <span class="eyebrow">404</span>
+            <h1 class="display-6 fw-bold">That page could not be found.</h1>
+            <p class="text-muted">The link may be outdated or the requested exam/test no longer exists.</p>
+            <a href="{{ url_for('main.dashboard') if current_user else url_for('main.landing') }}" class="btn btn-primary">Go back</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

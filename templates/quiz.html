@@ -1,0 +1,69 @@
+﻿{% extends "base.html" %}
+{% block title %}{{ test.title }} | MockPrep India{% endblock %}
+{% block content %}
+<section class="mb-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <div>
+            <span class="eyebrow">{{ exam.name }} / {{ test.test_type|upper }}</span>
+            <h1 class="h2 mb-1">{{ test.title }}</h1>
+            <p class="text-muted mb-0">{{ test.subtitle }}</p>
+        </div>
+        <div class="timer-panel">
+            <span>Time left</span>
+            <strong id="timerValue">--:--</strong>
+        </div>
+    </div>
+</section>
+
+<div id="testApp"
+     data-test-id="{{ test.id }}"
+     data-test-api="{{ url_for('main.test_api', test_id=test.id) }}"
+     data-submit-url="{{ url_for('main.submit_test') }}">
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="info-card mb-4">
+                <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                    <div>
+                        <span class="text-muted">Question <span id="questionPosition">1</span> of <span id="questionTotal">0</span></span>
+                        <h2 class="h4 mb-1" id="questionText">Loading question...</h2>
+                        <small class="text-muted" id="questionMeta"></small>
+                    </div>
+                    <button class="btn btn-sm btn-outline-light" id="bookmarkBtn" type="button">Mark for review</button>
+                </div>
+                <div class="progress progress-quiz mb-4"><div id="quizProgress" class="progress-bar" style="width: 0%"></div></div>
+                <div class="row g-3" id="optionsContainer"></div>
+                <div class="d-flex flex-wrap justify-content-between align-items-center mt-4 gap-3">
+                    <button class="btn btn-outline-light" id="prevBtn" type="button">Previous</button>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-warning" id="clearBtn" type="button">Clear response</button>
+                        <button class="btn btn-primary" id="nextBtn" type="button">Save and next</button>
+                    </div>
+                </div>
+            </div>
+            <div class="info-card">
+                <h3 class="h5">Instructions</h3>
+                <ul class="feature-list compact-list mb-0" id="instructionsList"></ul>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="info-card mb-4">
+                <h3 class="h5">Question palette</h3>
+                <div id="paletteGrid" class="palette-grid"></div>
+            </div>
+            <div class="info-card">
+                <h3 class="h5">Legend</h3>
+                <div class="legend-grid">
+                    <span><i class="dot dot-current"></i> Current</span>
+                    <span><i class="dot dot-answered"></i> Answered</span>
+                    <span><i class="dot dot-review"></i> Review</span>
+                    <span><i class="dot dot-unseen"></i> Unseen</span>
+                </div>
+                <button id="submitBtn" class="btn btn-success w-100 mt-4" type="button">Submit test</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+{% endblock %}

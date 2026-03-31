@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Leaderboard | MockPrep India{% endblock %}
+{% block content %}
+<section class="section-head mb-4">
+    <div>
+        <span class="eyebrow">Leaderboard</span>
+        <h1 class="h2 mb-0">Top performers</h1>
+    </div>
+    <form>
+        <select name="exam" class="form-select" onchange="this.form.submit()">
+            <option value="">All exams</option>
+            {% for exam in exams %}
+            <option value="{{ exam.slug }}" {% if selected_exam == exam.slug %}selected{% endif %}>{{ exam.name }}</option>
+            {% endfor %}
+        </select>
+    </form>
+</section>
+<div class="info-card">
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead><tr><th>Rank</th><th>Student</th><th>Test</th><th>Score</th><th>Accuracy</th><th>Time</th></tr></thead>
+            <tbody>
+                {% for attempt in attempts %}
+                <tr>
+                    <td>#{{ loop.index }}</td>
+                    <td>{{ attempt.user_name }}</td>
+                    <td>{{ attempt.test_title }}</td>
+                    <td>{{ attempt.percentage }}%</td>
+                    <td>{{ attempt.accuracy }}%</td>
+                    <td>{{ attempt.time_taken_seconds // 60 }} min</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="6" class="text-center text-muted py-4">No attempts yet for this filter.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

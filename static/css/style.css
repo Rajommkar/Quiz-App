@@ -1,0 +1,89 @@
+:root {
+    --bg: #0c1726;
+    --bg-alt: #14263d;
+    --panel: rgba(12, 24, 42, 0.88);
+    --panel-border: rgba(255, 255, 255, 0.08);
+    --text: #f4f7fb;
+    --muted: #a7bad1;
+    --accent: #f97316;
+    --accent-2: #15b8a6;
+    --danger: #f43f5e;
+    --warning: #facc15;
+    --success: #22c55e;
+    --shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+
+body {
+    min-height: 100vh;
+    color: var(--text);
+    font-family: "Manrope", sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(249, 115, 22, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(21, 184, 166, 0.18), transparent 24%),
+        linear-gradient(165deg, #08111c 0%, #0c1726 45%, #183354 100%);
+}
+
+h1, h2, h3, h4, .brand-mark { font-family: "Sora", sans-serif; }
+a { color: #8ad9ff; text-decoration: none; }
+a:hover { color: #c1eeff; }
+.page-shell { padding-bottom: 4rem; }
+.app-nav { background: rgba(7, 15, 28, 0.72); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+.navbar .nav-link, .navbar-brand { color: var(--text); }
+.brand-mark { font-size: 1.35rem; letter-spacing: 0.03em; }
+.hero-card, .info-card, .quiz-card, .auth-card { background: var(--panel); border: 1px solid var(--panel-border); box-shadow: var(--shadow); border-radius: 28px; }
+.hero-card, .info-card, .auth-card { padding: 2rem; }
+.quiz-card { padding: 1.5rem; transition: transform .25s ease, border-color .25s ease; }
+.quiz-card:hover { transform: translateY(-5px); border-color: rgba(249, 115, 22, 0.6); }
+.eyebrow { display: inline-block; margin-bottom: .75rem; color: var(--warning); text-transform: uppercase; letter-spacing: .14em; font-size: .74rem; font-weight: 800; }
+.hero-strip, .stats-grid, .stack-gap { display: grid; gap: 1rem; }
+.hero-strip { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.hero-strip span, .mini-row, .stat-pill, .message-banner, .demo-box, .timer-panel, .whatsapp-float { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; }
+.hero-strip span, .mini-row, .message-banner, .demo-box { padding: .95rem 1rem; }
+.timer-panel, .stat-pill { padding: 1rem 1.1rem; }
+.timer-panel { min-width: 150px; text-align: center; }
+.timer-panel span, .stat-pill span { display: block; color: var(--muted); }
+.timer-panel strong, .stat-pill strong { font-size: 1.65rem; }
+.badge-soft, .difficulty-chip { display: inline-flex; align-items: center; border-radius: 999px; padding: .42rem .8rem; font-size: .8rem; font-weight: 700; margin-right: .4rem; }
+.badge-soft { background: rgba(138, 217, 255, 0.14); color: #aee4ff; }
+.difficulty-chip { background: rgba(255,255,255,0.08); color: var(--text); }
+.feature-list { list-style: none; padding: 0; margin: 0; }
+.feature-list li { padding: .75rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.compact-list li { padding: .55rem 0; }
+.feature-list li:last-child { border-bottom: 0; }
+.meta-row { display: flex; flex-wrap: wrap; gap: .75rem; color: var(--muted); font-size: .95rem; }
+.form-control, .form-select { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: var(--text); border-radius: 16px; padding: .85rem 1rem; }
+.form-control:focus, .form-select:focus { background: rgba(255,255,255,0.08); color: var(--text); border-color: rgba(249, 115, 22, 0.8); box-shadow: 0 0 0 .25rem rgba(249,115,22,.15); }
+.form-select option { color: #111; }
+.btn { border-radius: 16px; font-weight: 700; padding: .8rem 1.1rem; }
+.btn-primary { background: linear-gradient(135deg, var(--accent), #fb923c); border: 0; }
+.btn-primary:hover { background: linear-gradient(135deg, #f97316, #ea580c); }
+.progress-quiz { height: 12px; background: rgba(255,255,255,0.08); border-radius: 999px; }
+.progress-quiz .progress-bar { background: linear-gradient(90deg, var(--accent-2), #67e8f9); }
+.option-card { cursor: pointer; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); padding: 1rem; transition: transform .2s ease, border-color .2s ease, background .2s ease; }
+.option-card:hover { transform: translateY(-2px); border-color: rgba(138,217,255,0.5); }
+.option-card.selected { border-color: rgba(249,115,22,.8); background: rgba(249,115,22,.14); }
+.palette-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: .6rem; }
+.palette-btn { border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.05); color: var(--text); border-radius: 14px; min-height: 44px; font-weight: 700; }
+.palette-btn.current { border-color: #8ad9ff; box-shadow: 0 0 0 1px #8ad9ff inset; }
+.palette-btn.answered { background: rgba(34,197,94,.18); border-color: rgba(34,197,94,.6); }
+.palette-btn.review { background: rgba(250,204,21,.18); border-color: rgba(250,204,21,.7); }
+.legend-grid { display: grid; gap: .7rem; color: var(--muted); font-size: .95rem; }
+.dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: .5rem; }
+.dot-current { background: #8ad9ff; }
+.dot-answered { background: var(--success); }
+.dot-review { background: var(--warning); }
+.dot-unseen { background: rgba(255,255,255,0.35); }
+.section-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.price-line { font-size: 2rem; font-weight: 800; margin-bottom: .8rem; }
+.recommended-card { border-color: rgba(249,115,22,.55); }
+.mini-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.table { --bs-table-bg: transparent; --bs-table-color: var(--text); --bs-table-border-color: rgba(255,255,255,0.08); }
+.text-muted, small, .small { color: var(--muted) !important; }
+.whatsapp-float { position: fixed; right: 20px; bottom: 20px; z-index: 1000; padding: .95rem 1.1rem; color: var(--text); background: linear-gradient(135deg, #16a34a, #22c55e); box-shadow: 0 18px 35px rgba(0,0,0,.22); }
+.whatsapp-float:hover { color: white; }
+@media (max-width: 768px) {
+    .hero-card, .info-card, .auth-card { padding: 1.35rem; border-radius: 22px; }
+    .section-head { flex-direction: column; align-items: stretch; }
+    .palette-grid { grid-template-columns: repeat(4, 1fr); }
+    .whatsapp-float { left: 16px; right: 16px; bottom: 16px; text-align: center; }
+}

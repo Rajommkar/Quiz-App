@@ -1,0 +1,59 @@
+﻿{% extends "base.html" %}
+{% block title %}Profile | MockPrep India{% endblock %}
+{% block content %}
+<section class="hero-card mb-4">
+    <span class="eyebrow">Profile</span>
+    <h1 class="display-6 fw-bold">{{ current_user.name }}</h1>
+    <p class="text-muted">{{ current_user.email }}</p>
+    <div class="row g-4 mt-1">
+        <div class="col-md-4"><div class="stat-pill h-100"><strong>{{ attempts|length }}</strong><span>Total attempts</span></div></div>
+        <div class="col-md-4"><div class="stat-pill h-100"><strong>{{ average }}%</strong><span>Average score</span></div></div>
+        <div class="col-md-4"><div class="stat-pill h-100"><strong>{{ purchases|length }}</strong><span>Active passes</span></div></div>
+    </div>
+</section>
+
+<section class="row g-4">
+    <div class="col-lg-7">
+        <div class="info-card h-100">
+            <h2 class="h4">Attempt history</h2>
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead><tr><th>Test</th><th>Score</th><th>Date</th></tr></thead>
+                    <tbody>
+                        {% for attempt in attempts %}
+                        <tr>
+                            <td><a href="{{ url_for('main.result_page', attempt_id=attempt.id) }}">{{ attempt.test_title }}</a></td>
+                            <td>{{ attempt.percentage }}%</td>
+                            <td>{{ attempt.created_at|dt }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="3" class="text-muted">No attempts yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="info-card h-100">
+            <h2 class="h4">Purchased passes</h2>
+            <div class="stack-gap">
+                {% for purchase in purchases %}
+                <div class="mini-row">
+                    <div>
+                        <strong>{{ purchase.plan_title }}</strong>
+                        <p class="text-muted mb-0 small">{{ purchase.payment_method }} / {{ purchase.transaction_ref }}</p>
+                    </div>
+                    <div class="text-end">
+                        <div class="fw-bold">{{ purchase.amount|currency }}</div>
+                        <div class="small text-muted">{{ purchase.created_at|dt }}</div>
+                    </div>
+                </div>
+                {% else %}
+                <p class="text-muted mb-0">No passes purchased yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

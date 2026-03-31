@@ -1,0 +1,112 @@
+﻿{% extends "base.html" %}
+{% block title %}Quizora | PG Entrance Mocks and PYQs{% endblock %}
+{% block content %}
+<section class="hero-card mb-4">
+    <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+            <span class="eyebrow">PG entrance test series</span>
+            <h1 class="display-5 fw-bold mb-3">Mock tests and PYQ packs for India's major PG exams.</h1>
+            <p class="lead text-muted mb-4">Build your CAT, GATE, GMAT, CUET PG, GPAT, CLAT PG, XAT, SNAP, NMAT, CMAT, and IIT JAM prep in one place with timed tests, pass-based access, analytics, and WhatsApp support.</p>
+            <div class="d-flex flex-wrap gap-3">
+                <a href="{{ url_for('main.register') }}" class="btn btn-primary btn-lg px-4">Start Free Tests</a>
+                <a href="{{ url_for('main.login') }}" class="btn btn-outline-light btn-lg px-4">Login</a>
+            </div>
+            <div class="hero-strip mt-4">
+                <span>5 year-wise PYQ-labelled sets per exam</span>
+                <span>3 timed mocks per exam</span>
+                <span>Per-exam and all-access pricing</span>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="info-card h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="h5 mb-0">Platform snapshot</h2>
+                    <span class="badge bg-info-subtle text-info-emphasis border">{{ exams|length }} exams</span>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-pill"><strong>96+</strong><span>Seeded papers</span></div>
+                    <div class="stat-pill"><strong>Mongo</strong><span>{{ mongo_mode }}</span></div>
+                    <div class="stat-pill"><strong>Timer</strong><span>Full-paper countdown</span></div>
+                    <div class="stat-pill"><strong>Support</strong><span>WhatsApp chat built in</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row g-4 mb-4">
+    <div class="col-lg-4"><div class="info-card h-100"><h3>Exam-like workflow</h3><p class="text-muted mb-0">Instructions screen, countdown timer, question palette, mark for review, autosave, result analytics, and answer review.</p></div></div>
+    <div class="col-lg-4"><div class="info-card h-100"><h3>Flexible monetization</h3><p class="text-muted mb-0">Students can buy PYQ-only, mock-only, one-exam combo passes, or the all-access package across major PG entrances.</p></div></div>
+    <div class="col-lg-4"><div class="info-card h-100"><h3>Portfolio ready</h3><p class="text-muted mb-0">This version is focused only on PG exams in India instead of generic quizzes, which makes the product positioning much stronger for your CV.</p></div></div>
+</section>
+
+<section class="mb-4">
+    <div class="section-head">
+        <div>
+            <span class="eyebrow">Exam catalog</span>
+            <h2 class="h3 mb-0">Major exams covered</h2>
+        </div>
+    </div>
+    <div class="row g-4">
+        {% for exam in exams %}
+        <div class="col-md-6 col-xl-4">
+            <div class="quiz-card h-100">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <span class="badge-soft">{{ exam.stream }}</span>
+                    <span class="difficulty-chip">{{ exam.pyq_count }} PYQs / {{ exam.mock_count }} mocks</span>
+                </div>
+                <h4>{{ exam.name }}</h4>
+                <p class="text-muted">{{ exam.hero }}</p>
+                <div class="meta-row mb-3">
+                    <span>{{ exam.duration_minutes }} mins</span>
+                    <span>{{ exam.sections|join(' / ') }}</span>
+                    <span>{{ exam.free_tests }} free papers</span>
+                </div>
+                {% if current_user %}
+                <a href="{{ url_for('main.exam_detail', slug=exam.slug) }}" class="btn btn-primary w-100">Open {{ exam.name }}</a>
+                {% else %}
+                <a href="{{ url_for('main.register') }}" class="btn btn-primary w-100">Create account</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="row g-4 mb-4">
+    {% for plan in featured_plans %}
+    <div class="col-md-6 col-xl-3">
+        <div class="info-card h-100 {% if plan.recommended %}recommended-card{% endif %}">
+            <span class="eyebrow">{{ "Top pick" if plan.recommended else "Plan" }}</span>
+            <h3 class="h5">{{ plan.title }}</h3>
+            <div class="price-line">{{ plan.price|currency }}</div>
+            <p class="text-muted">{{ plan.description }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+<section>
+    <div class="section-head">
+        <div>
+            <span class="eyebrow">Free starters</span>
+            <h2 class="h3 mb-0">Sample papers visible from day one</h2>
+        </div>
+    </div>
+    <div class="row g-4">
+        {% for test in featured_tests %}
+        <div class="col-md-6 col-xl-3">
+            <div class="quiz-card h-100">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <span class="badge-soft">{{ test.exam.name }}</span>
+                    <span class="badge {% if test.is_free %}bg-success{% else %}bg-warning text-dark{% endif %}">{{ "Free" if test.is_free else "Locked" }}</span>
+                </div>
+                <h4>{{ test.title }}</h4>
+                <p class="text-muted">{{ test.subtitle }}</p>
+                <div class="meta-row"><span>{{ test.question_count }} questions</span><span>{{ test.duration_minutes }} mins</span></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

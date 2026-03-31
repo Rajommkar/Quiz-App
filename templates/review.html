@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Review | MockPrep India{% endblock %}
+{% block content %}
+<section class="mb-4">
+    <span class="eyebrow">Review mode</span>
+    <h1 class="h2 mb-0">{{ attempt.test_title }}</h1>
+</section>
+<div class="row g-4">
+    {% for answer in attempt.answers %}
+    <div class="col-12">
+        <div class="info-card">
+            <div class="d-flex justify-content-between align-items-start gap-3 mb-2">
+                <div>
+                    <h2 class="h5 mb-1">{{ loop.index }}. {{ answer.question_text }}</h2>
+                    <small class="text-muted">{{ answer.section }}</small>
+                </div>
+                <span class="badge {% if answer.status == 'correct' %}bg-success{% elif answer.status == 'wrong' %}bg-danger{% else %}bg-secondary{% endif %}">{{ answer.status|capitalize }}</span>
+            </div>
+            <p class="mb-1"><strong>Your answer:</strong> {{ answer.selected_option or 'Not answered' }}</p>
+            <p class="mb-1"><strong>Correct answer:</strong> {{ answer.correct_option }}</p>
+            <p class="text-muted mb-0"><strong>Explanation:</strong> {{ answer.explanation }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

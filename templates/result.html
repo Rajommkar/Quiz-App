@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Result | MockPrep India{% endblock %}
+{% block content %}
+<section class="hero-card mb-4">
+    <span class="eyebrow">Result</span>
+    <h1 class="display-6 fw-bold">{{ attempt.test_title }}</h1>
+    <p class="text-muted">Completed on {{ attempt.created_at|dt }}</p>
+    <div class="row g-4 mt-1">
+        <div class="col-md-3"><div class="stat-pill h-100"><strong>{{ attempt.score }}</strong><span>Score</span></div></div>
+        <div class="col-md-3"><div class="stat-pill h-100"><strong>{{ attempt.percentage }}%</strong><span>Percent score</span></div></div>
+        <div class="col-md-3"><div class="stat-pill h-100"><strong>{{ attempt.accuracy }}%</strong><span>Accuracy</span></div></div>
+        <div class="col-md-3"><div class="stat-pill h-100"><strong>{{ attempt.time_taken_seconds // 60 }} min</strong><span>Time taken</span></div></div>
+    </div>
+    <div class="d-flex flex-wrap gap-3 mt-4">
+        <a href="{{ url_for('main.review_page', attempt_id=attempt.id) }}" class="btn btn-primary">Review answers</a>
+        <a href="{{ url_for('main.test_page', test_id=attempt.test_id) }}" class="btn btn-outline-light">Retake test</a>
+        <a href="{{ url_for('main.leaderboard', exam=attempt.exam_slug) }}" class="btn btn-outline-light">Leaderboard</a>
+    </div>
+</section>
+
+<section class="row g-4">
+    <div class="col-lg-6">
+        <div class="info-card h-100">
+            <h3 class="h4">Attempt breakdown</h3>
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <tbody>
+                        <tr><th>Correct</th><td>{{ attempt.correct_answers }}</td></tr>
+                        <tr><th>Wrong</th><td>{{ attempt.wrong_answers }}</td></tr>
+                        <tr><th>Unanswered</th><td>{{ attempt.unanswered_answers }}</td></tr>
+                        <tr><th>Max score</th><td>{{ attempt.max_score }}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="info-card h-100">
+            <h3 class="h4">Section-wise summary</h3>
+            <div class="stack-gap">
+                {% for item in attempt.section_summary %}
+                <div class="mini-row">
+                    <div>
+                        <strong>{{ item.section }}</strong>
+                        <p class="text-muted mb-0 small">{{ item.total }} questions</p>
+                    </div>
+                    <div class="text-end small">
+                        <div>Correct: {{ item.correct }}</div>
+                        <div>Wrong: {{ item.wrong }}</div>
+                        <div>Unanswered: {{ item.unanswered }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}{{ exam.name }} | MockPrep India{% endblock %}
+{% block content %}
+<section class="hero-card mb-4">
+    <div class="row g-4 align-items-center">
+        <div class="col-lg-8">
+            <span class="eyebrow">{{ exam.stream }} prep</span>
+            <h1 class="display-6 fw-bold">{{ exam.name }}</h1>
+            <p class="lead text-muted mb-3">{{ exam.hero }}</p>
+            <div class="meta-row"><span>{{ exam.full_name }}</span><span>{{ exam.duration_minutes }} mins</span><span>{{ exam.sections|join(' / ') }}</span></div>
+        </div>
+        <div class="col-lg-4">
+            <div class="stats-grid">
+                <div class="stat-pill"><strong>{{ tests|selectattr('test_type', 'equalto', 'pyq')|list|length }}</strong><span>PYQ papers</span></div>
+                <div class="stat-pill"><strong>{{ tests|selectattr('test_type', 'equalto', 'mock')|list|length }}</strong><span>Mock tests</span></div>
+                <div class="stat-pill"><strong>{% if access.complete %}Full{% elif access.pyq or access.mock %}Partial{% else %}None{% endif %}</strong><span>Current access</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row g-4 mb-4">
+    {% for plan in plans %}
+    <div class="col-md-6 col-xl-3">
+        <div class="info-card h-100 {% if plan.recommended %}recommended-card{% endif %}">
+            <span class="eyebrow">{% if plan.recommended %}Recommended{% else %}Pass{% endif %}</span>
+            <h3 class="h5">{{ plan.title }}</h3>
+            <div class="price-line">{{ plan.price|currency }}</div>
+            <p class="text-muted">{{ plan.description }}</p>
+            <ul class="feature-list compact-list">
+                {% for feature in plan.features %}
+                <li>{{ feature }}</li>
+                {% endfor %}
+            </ul>
+            {% if plan.owned %}
+            <button class="btn btn-success w-100" disabled>Already active</button>
+            {% else %}
+            <a href="{{ url_for('main.checkout', plan_slug=plan.slug) }}" class="btn btn-primary w-100">Buy pass</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+<section>
+    <div class="section-head">
+        <div><span class="eyebrow">Paper library</span><h2 class="h3 mb-0">Available tests</h2></div>
+    </div>
+    <div class="row g-4">
+        {% for test in tests %}
+        <div class="col-md-6 col-xl-4">
+            <div class="quiz-card h-100">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <span class="badge-soft">{{ test.test_type|upper }}</span>
+                    <span class="badge {% if test.unlocked %}bg-success{% else %}bg-warning text-dark{% endif %}">{{ "Unlocked" if test.unlocked else "Locked" }}</span>
+                </div>
+                <h4>{{ test.title }}</h4>
+                <p class="text-muted">{{ test.subtitle }}</p>
+                <div class="meta-row mb-3"><span>{{ test.question_count }} questions</span><span>{{ test.duration_minutes }} mins</span><span>Negative {{ test.negative_marks }}</span></div>
+                {% if test.unlocked %}
+                <a href="{{ url_for('main.test_page', test_id=test.id) }}" class="btn btn-primary w-100">Start now</a>
+                {% else %}
+                <a href="#plans" class="btn btn-outline-warning w-100">Choose a pass</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

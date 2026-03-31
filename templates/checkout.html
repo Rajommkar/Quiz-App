@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Checkout | MockPrep India{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="hero-card">
+            <span class="eyebrow">Checkout</span>
+            <h1 class="h2">{{ plan.title }}</h1>
+            <p class="text-muted">{{ plan.description }}</p>
+            <div class="row g-3 my-3">
+                <div class="col-md-4"><div class="stat-pill h-100"><strong>{{ plan.price|currency }}</strong><span>Plan price</span></div></div>
+                <div class="col-md-4"><div class="stat-pill h-100"><strong>{{ plan.access_tiers|join(' + ')|upper }}</strong><span>Access type</span></div></div>
+                <div class="col-md-4"><div class="stat-pill h-100"><strong>{{ plan.exam_slug|upper }}</strong><span>Coverage</span></div></div>
+            </div>
+            <ul class="feature-list compact-list mb-4">
+                {% for feature in plan.features %}<li>{{ feature }}</li>{% endfor %}
+            </ul>
+            <form method="post" class="row g-3">
+                <div class="col-12">
+                    <label class="form-label">Payment method</label>
+                    <select name="payment_method" class="form-select">
+                        <option value="UPI">UPI</option>
+                        <option value="Card">Credit / Debit Card</option>
+                        <option value="NetBanking">Net Banking</option>
+                    </select>
+                </div>
+                <div class="col-12"><div class="message-banner">This is a working demo checkout for portfolio use. It stores the purchase and unlocks the pass immediately.</div></div>
+                <div class="col-12 d-grid"><button type="submit" class="btn btn-primary btn-lg">Pay {{ plan.price|currency }} and unlock</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

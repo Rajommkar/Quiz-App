@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Test Library | MockPrep India{% endblock %}
+{% block content %}
+<section class="section-head mb-4">
+    <div>
+        <span class="eyebrow">Test library</span>
+        <h1 class="h2 mb-0">Mocks and PYQs across PG exams</h1>
+    </div>
+    <form class="row g-2">
+        <div class="col-sm-auto">
+            <select class="form-select" name="exam">
+                <option value="">All exams</option>
+                {% for exam in exams %}
+                <option value="{{ exam.slug }}" {% if selected_exam == exam.slug %}selected{% endif %}>{{ exam.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-sm-auto">
+            <select class="form-select" name="type">
+                <option value="">All types</option>
+                <option value="pyq" {% if selected_type == 'pyq' %}selected{% endif %}>PYQs</option>
+                <option value="mock" {% if selected_type == 'mock' %}selected{% endif %}>Mocks</option>
+            </select>
+        </div>
+        <div class="col-sm-auto"><button class="btn btn-primary" type="submit">Filter</button></div>
+    </form>
+</section>
+
+<div class="row g-4">
+    {% for test in tests %}
+    <div class="col-md-6 col-xl-4">
+        <div class="quiz-card h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                    <span class="badge-soft">{{ test.exam.name }}</span>
+                    <span class="difficulty-chip">{{ test.test_type|upper }}</span>
+                </div>
+                <span class="badge {% if test.unlocked %}bg-success{% else %}bg-warning text-dark{% endif %}">{{ "Unlocked" if test.unlocked else "Locked" }}</span>
+            </div>
+            <h4>{{ test.title }}</h4>
+            <p class="text-muted">{{ test.subtitle }}</p>
+            <div class="meta-row mb-3"><span>{{ test.question_count }} questions</span><span>{{ test.duration_minutes }} mins</span><span>{{ test.difficulty }}</span></div>
+            {% if test.unlocked %}
+            <a href="{{ url_for('main.test_page', test_id=test.id) }}" class="btn btn-primary w-100">Start test</a>
+            {% else %}
+            <a href="{{ url_for('main.exam_detail', slug=test.exam_slug) }}" class="btn btn-outline-warning w-100">Unlock {{ test.exam.name }}</a>
+            {% endif %}
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12"><div class="info-card text-center"><h3>No tests matched this filter.</h3><p class="text-muted mb-0">Try a broader exam or paper type.</p></div></div>
+    {% endfor %}
+</div>
+{% endblock %}
