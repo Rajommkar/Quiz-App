@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         remainingSeconds: 0,
         intervalId: null,
         startedAt: Date.now(),
+        durationMinutes: 0,
     };
 
     function saveState() {
@@ -37,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
             seen: state.seen,
             remainingSeconds: state.remainingSeconds,
             startedAt: state.startedAt,
+            durationMinutes: state.durationMinutes,
         }));
     }
 
@@ -51,15 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
             state.seen = parsed.seen || {};
             state.remainingSeconds = parsed.remainingSeconds || 0;
             state.startedAt = parsed.startedAt || Date.now();
+            state.durationMinutes = parsed.durationMinutes || 0;
         } catch {
             localStorage.removeItem(storageKey);
         }
     }
 
     function formatTime(totalSeconds) {
-        const mins = Math.floor(totalSeconds / 60).toString().padStart(2, "0");
+        const hours = Math.floor(totalSeconds / 3600);
+        const mins = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, "0");
         const secs = Math.floor(totalSeconds % 60).toString().padStart(2, "0");
-        return `${mins}:${secs}`;
+        return hours > 0 ? `${hours.toString().padStart(2, "0")}:${mins}:${secs}` : `${mins}:${secs}`;
     }
 
     function startTimer() {
@@ -69,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
             state.remainingSeconds -= 1;
             if (state.remainingSeconds <= 0) {
                 state.remainingSeconds = 0;
-                timerValue.textContent = "00:00";
+                timerValue.textContent = formatTime(0);
                 clearInterval(state.intervalId);
                 submitTest();
                 return;
@@ -121,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
         questionPosition.textContent = state.currentIndex + 1;
         questionTotal.textContent = state.test.questions.length;
         questionText.textContent = question.text;
-        questionMeta.textContent = `${question.section} • ${question.marks} mark(s) • -${question.negative_marks}`;
+        questionMeta.textContent = `${question.section} - ${question.marks} mark(s) - -${question.negative_marks}`;
         quizProgress.style.width = `${((state.currentIndex + 1) / state.test.questions.length) * 100}%`;
         bookmarkBtn.textContent = state.review[question.question_key] ? "Marked for review" : "Mark for review";
         prevBtn.disabled = state.currentIndex === 0;
@@ -161,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
             question_key: question.question_key,
             selected_option: answerFor(question.question_key),
         }));
-        const spentSeconds = (state.test.duration_minutes * 60) - state.remainingSeconds;
+        const spentSeconds = (state.durationMinutes * 60) - state.remainingSeconds;
         const response = await fetch(app.dataset.submitUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -204,8 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         state.test = test;
+        state.durationMinutes = test.adaptive_duration_minutes || test.duration_minutes;
         instructionsList.innerHTML = test.instructions.map((item) => `<li>${item}</li>`).join("");
-        if (!state.remainingSeconds) state.remainingSeconds = test.duration_minutes * 60;
+        if (!state.remainingSeconds || state.durationMinutes * 60 < state.remainingSeconds) {
+            state.remainingSeconds = state.durationMinutes * 60;
+        }
         startTimer();
         renderQuestion();
     }

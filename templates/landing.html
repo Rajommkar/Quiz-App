@@ -1,69 +1,101 @@
 ﻿{% extends "base.html" %}
-{% block title %}Quizora | PG Entrance Mocks and PYQs{% endblock %}
+{% block title %}{{ brand_name }}{% endblock %}
 {% block content %}
-<section class="hero-card mb-4">
-    <div class="row g-4 align-items-center">
-        <div class="col-lg-7">
-            <span class="eyebrow">PG entrance test series</span>
-            <h1 class="display-5 fw-bold mb-3">Mock tests and PYQ packs for India's major PG exams.</h1>
-            <p class="lead text-muted mb-4">Build your CAT, GATE, GMAT, CUET PG, GPAT, CLAT PG, XAT, SNAP, NMAT, CMAT, and IIT JAM prep in one place with timed tests, pass-based access, analytics, and WhatsApp support.</p>
-            <div class="d-flex flex-wrap gap-3">
-                <a href="{{ url_for('main.register') }}" class="btn btn-primary btn-lg px-4">Start Free Tests</a>
-                <a href="{{ url_for('main.login') }}" class="btn btn-outline-light btn-lg px-4">Login</a>
-            </div>
-            <div class="hero-strip mt-4">
-                <span>5 year-wise PYQ-labelled sets per exam</span>
-                <span>3 timed mocks per exam</span>
-                <span>Per-exam and all-access pricing</span>
-            </div>
-        </div>
-        <div class="col-lg-5">
-            <div class="info-card h-100">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2 class="h5 mb-0">Platform snapshot</h2>
-                    <span class="badge bg-info-subtle text-info-emphasis border">{{ exams|length }} exams</span>
+<section class="hero-shell mb-5">
+    <div class="hero-card hero-surface">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-7">
+                <span class="eyebrow">PG entrance exams only</span>
+                <h1 class="display-4 fw-bold mb-3">One destination for focused PG entrance preparation.</h1>
+                <p class="lead text-muted mb-4">Inspired by the clarity and conversion flow of Testbook, but built only for PG aspirants. Prepare for CAT, XAT, SNAP, NMAT, GATE, IIT JAM, CUET PG, GPAT and CLAT PG with timed mocks, PYQs, analytics and simple access plans.</p>
+                <div class="hero-actions">
+                    <a href="{{ url_for('main.register') }}" class="btn btn-primary btn-lg px-4">Get Started for Free</a>
+                    <a href="{{ url_for('main.login') }}" class="btn btn-outline-light btn-lg px-4">Login</a>
                 </div>
-                <div class="stats-grid">
-                    <div class="stat-pill"><strong>96+</strong><span>Seeded papers</span></div>
-                    <div class="stat-pill"><strong>Mongo</strong><span>{{ mongo_mode }}</span></div>
-                    <div class="stat-pill"><strong>Timer</strong><span>Full-paper countdown</span></div>
-                    <div class="stat-pill"><strong>Support</strong><span>WhatsApp chat built in</span></div>
+                <div class="hero-chip-row mt-4">
+                    <span>MBA entrance</span>
+                    <span>M.Tech and M.Sc prep</span>
+                    <span>Law and pharmacy PG exams</span>
+                    <span>PYQs plus full mocks</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="hero-panel">
+                    <div class="hero-panel-head">
+                        <div>
+                            <p class="panel-label mb-1">Platform snapshot</p>
+                            <h2 class="h4 mb-0">{{ brand_name }}</h2>
+                        </div>
+                        <span class="badge-soft">{{ exams|length }} exam tracks</span>
+                    </div>
+                    <div class="hero-stats-grid">
+                        <div class="metric-card">
+                            <strong>{{ exams|length }}</strong>
+                            <span>PG exam categories</span>
+                        </div>
+                        <div class="metric-card">
+                            <strong>96+</strong>
+                            <span>Seeded papers live</span>
+                        </div>
+                        <div class="metric-card">
+                            <strong>Adaptive</strong>
+                            <span>Timer per sample set</span>
+                        </div>
+                        <div class="metric-card">
+                            <strong>{{ mongo_mode|upper }}</strong>
+                            <span>Active data mode</span>
+                        </div>
+                    </div>
+                    <div class="hero-proof">
+                        <div><span class="proof-number">5</span><span class="proof-copy">PYQ-style sets per exam</span></div>
+                        <div><span class="proof-number">3</span><span class="proof-copy">full mocks per exam</span></div>
+                        <div><span class="proof-number">1</span><span class="proof-copy">PG-only product focus</span></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="row g-4 mb-4">
-    <div class="col-lg-4"><div class="info-card h-100"><h3>Exam-like workflow</h3><p class="text-muted mb-0">Instructions screen, countdown timer, question palette, mark for review, autosave, result analytics, and answer review.</p></div></div>
-    <div class="col-lg-4"><div class="info-card h-100"><h3>Flexible monetization</h3><p class="text-muted mb-0">Students can buy PYQ-only, mock-only, one-exam combo passes, or the all-access package across major PG entrances.</p></div></div>
-    <div class="col-lg-4"><div class="info-card h-100"><h3>Portfolio ready</h3><p class="text-muted mb-0">This version is focused only on PG exams in India instead of generic quizzes, which makes the product positioning much stronger for your CV.</p></div></div>
+<section class="stats-band mb-5">
+    <div class="row g-3">
+        <div class="col-md-3 col-6"><div class="stat-band-card"><strong>{{ exams|length }}</strong><span>Focused exam families</span></div></div>
+        <div class="col-md-3 col-6"><div class="stat-band-card"><strong>5 + 3</strong><span>PYQs and mocks per exam</span></div></div>
+        <div class="col-md-3 col-6"><div class="stat-band-card"><strong>Free</strong><span>Starter papers for discovery</span></div></div>
+        <div class="col-md-3 col-6"><div class="stat-band-card"><strong>WhatsApp</strong><span>Support visible from every page</span></div></div>
+    </div>
 </section>
 
-<section class="mb-4">
-    <div class="section-head">
+<section class="mb-5">
+    <div class="section-head section-head-stacked">
         <div>
-            <span class="eyebrow">Exam catalog</span>
-            <h2 class="h3 mb-0">Major exams covered</h2>
+            <span class="eyebrow">Popular exam families</span>
+            <h2 class="display-6 mb-2">Choose your PG path, then start practicing</h2>
+            <p class="text-muted mb-0">This section is deliberately tighter than Testbook. No government-job clutter, no unrelated categories, only high-intent PG prep.</p>
         </div>
     </div>
     <div class="row g-4">
         {% for exam in exams %}
         <div class="col-md-6 col-xl-4">
-            <div class="quiz-card h-100">
-                <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="quiz-card exam-card h-100">
+                <div class="exam-card-top">
                     <span class="badge-soft">{{ exam.stream }}</span>
                     <span class="difficulty-chip">{{ exam.pyq_count }} PYQs / {{ exam.mock_count }} mocks</span>
                 </div>
-                <h4>{{ exam.name }}</h4>
+                <h3 class="h4">{{ exam.name }}</h3>
                 <p class="text-muted">{{ exam.hero }}</p>
                 <div class="meta-row mb-3">
-                    <span>{{ exam.duration_minutes }} mins</span>
-                    <span>{{ exam.sections|join(' / ') }}</span>
+                    <span>{{ exam.sample_question_count }}Q demo in {{ exam.sample_duration_minutes }} mins</span>
+                    <span>{{ exam.duration_minutes }} mins official exam</span>
                     <span>{{ exam.free_tests }} free papers</span>
                 </div>
+                <div class="section-pill-row mb-4">
+                    {% for section in exam.sections %}
+                    <span>{{ section }}</span>
+                    {% endfor %}
+                </div>
                 {% if current_user %}
-                <a href="{{ url_for('main.exam_detail', slug=exam.slug) }}" class="btn btn-primary w-100">Open {{ exam.name }}</a>
+                <a href="{{ url_for('main.exam_detail', slug=exam.slug) }}" class="btn btn-primary w-100">Explore {{ exam.name }}</a>
                 {% else %}
                 <a href="{{ url_for('main.register') }}" class="btn btn-primary w-100">Create account</a>
                 {% endif %}
@@ -73,11 +105,29 @@
     </div>
 </section>
 
-<section class="row g-4 mb-4">
+<section class="feature-banner mb-5">
+    <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+            <span class="eyebrow">Pass structure</span>
+            <h2 class="display-6 mb-3">Simple access plans, no messy catalog confusion</h2>
+            <p class="text-muted mb-0">Testbook works because it surfaces the right choices quickly. Here we keep that clarity, but the plans stay strictly inside the PG entrance universe.</p>
+        </div>
+        <div class="col-lg-5">
+            <div class="mini-feature-list">
+                <span>Exam-wise PYQ pass</span>
+                <span>Exam-wise mock pass</span>
+                <span>Complete combo for one exam</span>
+                <span>All-access PG pass</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row g-4 mb-5">
     {% for plan in featured_plans %}
     <div class="col-md-6 col-xl-3">
-        <div class="info-card h-100 {% if plan.recommended %}recommended-card{% endif %}">
-            <span class="eyebrow">{{ "Top pick" if plan.recommended else "Plan" }}</span>
+        <div class="info-card pricing-card h-100 {% if plan.recommended %}recommended-card{% endif %}">
+            <span class="eyebrow">{{ "Most chosen" if plan.recommended else "Plan" }}</span>
             <h3 class="h5">{{ plan.title }}</h3>
             <div class="price-line">{{ plan.price|currency }}</div>
             <p class="text-muted">{{ plan.description }}</p>
@@ -86,27 +136,57 @@
     {% endfor %}
 </section>
 
-<section>
-    <div class="section-head">
+<section class="mb-5">
+    <div class="section-head section-head-stacked">
+        <div>
+            <span class="eyebrow">Why students stay</span>
+            <h2 class="display-6 mb-2">Built for exam-day rhythm, not just pretty cards</h2>
+        </div>
+    </div>
+    <div class="row g-4">
+        <div class="col-lg-3 col-md-6"><div class="info-card feature-tile h-100"><h3>Adaptive timer</h3><p class="text-muted mb-0">Demo sets now scale time by official exam pattern, so a 12-question CAT sample no longer gets the full 120 minutes.</p></div></div>
+        <div class="col-lg-3 col-md-6"><div class="info-card feature-tile h-100"><h3>Real navigation</h3><p class="text-muted mb-0">Palette, review flags, autosave, clear response and result review mirror the workflow students expect from serious test apps.</p></div></div>
+        <div class="col-lg-3 col-md-6"><div class="info-card feature-tile h-100"><h3>PG-only catalog</h3><p class="text-muted mb-0">Every section reinforces postgraduate entrance prep, which makes the product sharper and much more believable.</p></div></div>
+        <div class="col-lg-3 col-md-6"><div class="info-card feature-tile h-100"><h3>Cleaner visual language</h3><p class="text-muted mb-0">The layout uses stronger spacing, layered surfaces and restrained color instead of that flat, synthetic AI-template look.</p></div></div>
+    </div>
+</section>
+
+<section class="mb-5">
+    <div class="section-head section-head-stacked">
         <div>
             <span class="eyebrow">Free starters</span>
-            <h2 class="h3 mb-0">Sample papers visible from day one</h2>
+            <h2 class="display-6 mb-2">Start with free papers before unlocking full packs</h2>
         </div>
     </div>
     <div class="row g-4">
         {% for test in featured_tests %}
         <div class="col-md-6 col-xl-3">
-            <div class="quiz-card h-100">
+            <div class="quiz-card starter-card h-100">
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <span class="badge-soft">{{ test.exam.name }}</span>
-                    <span class="badge {% if test.is_free %}bg-success{% else %}bg-warning text-dark{% endif %}">{{ "Free" if test.is_free else "Locked" }}</span>
+                    <span class="badge {% if test.is_free %}bg-success-subtle text-success-emphasis{% else %}bg-warning-subtle text-warning-emphasis{% endif %}">{{ "Free" if test.is_free else "Locked" }}</span>
                 </div>
                 <h4>{{ test.title }}</h4>
                 <p class="text-muted">{{ test.subtitle }}</p>
-                <div class="meta-row"><span>{{ test.question_count }} questions</span><span>{{ test.duration_minutes }} mins</span></div>
+                <div class="meta-row">
+                    <span>{{ test.question_count }} questions</span>
+                    <span>{{ test.exam.duration_minutes }} mins full pattern</span>
+                </div>
             </div>
         </div>
         {% endfor %}
+    </div>
+</section>
+
+<section class="closing-cta">
+    <div class="info-card closing-card text-center">
+        <span class="eyebrow">Final call</span>
+        <h2 class="display-6 mb-3">Prepare smarter for PG entrances, one serious mock at a time</h2>
+        <p class="text-muted mb-4">The new identity is narrow on purpose: only postgraduate entrance exams, cleaner decisions, and a landing page that looks built by a person with a point of view.</p>
+        <div class="d-flex justify-content-center flex-wrap gap-3">
+            <a href="{{ url_for('main.register') }}" class="btn btn-primary btn-lg px-4">Create account</a>
+            <a href="{{ url_for('main.login') }}" class="btn btn-outline-light btn-lg px-4">Open dashboard</a>
+        </div>
     </div>
 </section>
 {% endblock %}

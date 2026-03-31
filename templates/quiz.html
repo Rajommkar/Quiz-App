@@ -1,12 +1,12 @@
-﻿{% extends "base.html" %}
-{% block title %}{{ test.title }} | MockPrep India{% endblock %}
+{% extends "base.html" %}
+{% block title %}{{ test.title }} | {{ brand_name }}{% endblock %}
 {% block content %}
 <section class="mb-4">
     <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
         <div>
             <span class="eyebrow">{{ exam.name }} / {{ test.test_type|upper }}</span>
             <h1 class="h2 mb-1">{{ test.title }}</h1>
-            <p class="text-muted mb-0">{{ test.subtitle }}</p>
+            <p class="text-muted mb-0">{{ test.subtitle }} - {{ test.questions|length }} questions in {{ adaptive_duration_minutes }} minutes based on the official {{ exam.duration_minutes }} minute pattern.</p>
         </div>
         <div class="timer-panel">
             <span>Time left</span>

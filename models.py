@@ -68,25 +68,25 @@ BANKS = {
 
 
 EXAMS = [
-    {"slug": "cat", "name": "CAT", "full_name": "Common Admission Test", "stream": "MBA", "duration_minutes": 120, "negative_marks": 1, "default_marks": 3, "question_count": 12, "difficulty": "Hard", "library_key": "management", "sections": ["VARC", "DILR", "QA"], "hero": "CAT-style mocks and PYQ-labelled papers with percentile-focused analysis."},
-    {"slug": "xat", "name": "XAT", "full_name": "Xavier Aptitude Test", "stream": "MBA", "duration_minutes": 180, "negative_marks": 0.25, "default_marks": 1, "question_count": 12, "difficulty": "Hard", "library_key": "management", "sections": ["Verbal", "DM", "Quant"], "hero": "Decision-making and speed-driven XAT practice."},
-    {"slug": "cmat", "name": "CMAT", "full_name": "Common Management Admission Test", "stream": "MBA", "duration_minutes": 180, "negative_marks": 1, "default_marks": 4, "question_count": 12, "difficulty": "Medium", "library_key": "management", "sections": ["Quant", "LR", "Language"], "hero": "CMAT practice packs with quick review loops."},
-    {"slug": "snap", "name": "SNAP", "full_name": "Symbiosis National Aptitude Test", "stream": "MBA", "duration_minutes": 60, "negative_marks": 0.25, "default_marks": 1, "question_count": 12, "difficulty": "Medium", "library_key": "management", "sections": ["English", "Analytical", "Quant"], "hero": "Fast SNAP simulations built for speed and accuracy."},
-    {"slug": "nmat", "name": "NMAT", "full_name": "NMAT by GMAC", "stream": "MBA", "duration_minutes": 120, "negative_marks": 0, "default_marks": 3, "question_count": 12, "difficulty": "Medium", "library_key": "management", "sections": ["Language", "LR", "Quant"], "hero": "Clean NMAT-style pacing and mock review."},
-    {"slug": "gmat", "name": "GMAT", "full_name": "GMAT Focus Edition", "stream": "Management", "duration_minutes": 135, "negative_marks": 0, "default_marks": 1, "question_count": 10, "difficulty": "Hard", "library_key": "gmat", "sections": ["Quant", "Verbal", "Data Insights"], "hero": "GMAT-style practice for Indian and global applicants."},
-    {"slug": "gate-cse", "name": "GATE CSE", "full_name": "GATE - Computer Science", "stream": "M.Tech", "duration_minutes": 180, "negative_marks": 0.33, "default_marks": 1, "question_count": 10, "difficulty": "Hard", "library_key": "gate", "sections": ["GA", "Core", "Math"], "hero": "Core CS mock and PYQ prep for GATE."},
-    {"slug": "gate-da", "name": "GATE DA", "full_name": "GATE - Data Science & AI", "stream": "M.Tech", "duration_minutes": 180, "negative_marks": 0.33, "default_marks": 1, "question_count": 10, "difficulty": "Hard", "library_key": "gate", "sections": ["GA", "Math", "Data"], "hero": "GATE DA practice with aptitude and data-centric sets."},
-    {"slug": "iit-jam", "name": "IIT JAM", "full_name": "Joint Admission Test for Masters", "stream": "M.Sc", "duration_minutes": 180, "negative_marks": 0.33, "default_marks": 1, "question_count": 10, "difficulty": "Medium", "library_key": "science", "sections": ["Science", "Math", "Reasoning"], "hero": "JAM-style science practice with review support."},
-    {"slug": "cuet-pg", "name": "CUET PG", "full_name": "Common University Entrance Test - PG", "stream": "University PG", "duration_minutes": 105, "negative_marks": 1, "default_marks": 4, "question_count": 10, "difficulty": "Medium", "library_key": "science", "sections": ["Domain", "General"], "hero": "CUET PG packs for central university aspirants."},
-    {"slug": "gpat", "name": "GPAT", "full_name": "Graduate Pharmacy Aptitude Test", "stream": "M.Pharm", "duration_minutes": 180, "negative_marks": 1, "default_marks": 4, "question_count": 10, "difficulty": "Medium", "library_key": "pharma", "sections": ["Pharma", "Chem", "Stats"], "hero": "GPAT practice with pharmacy-first analytics."},
-    {"slug": "clat-pg", "name": "CLAT PG", "full_name": "Common Law Admission Test - PG", "stream": "LL.M", "duration_minutes": 120, "negative_marks": 0.25, "default_marks": 1, "question_count": 10, "difficulty": "Medium", "library_key": "law", "sections": ["Consti", "Jurisprudence", "Legal Reasoning"], "hero": "CLAT PG full mocks and legal reasoning review."},
+    {"slug": "cat", "name": "CAT", "full_name": "Common Admission Test", "stream": "MBA", "duration_minutes": 120, "official_question_count": 68, "sample_question_count": 12, "negative_marks": 1, "default_marks": 3, "difficulty": "Hard", "library_key": "management", "sections": ["VARC", "DILR", "QA"], "hero": "CAT-style mocks and PYQ-labelled papers with percentile-focused analysis."},
+    {"slug": "xat", "name": "XAT", "full_name": "Xavier Aptitude Test", "stream": "MBA", "duration_minutes": 180, "official_question_count": 95, "sample_question_count": 12, "negative_marks": 0.25, "default_marks": 1, "difficulty": "Hard", "library_key": "management", "sections": ["Verbal", "DM", "Quant"], "hero": "Decision-making and speed-driven XAT practice."},
+    {"slug": "cmat", "name": "CMAT", "full_name": "Common Management Admission Test", "stream": "MBA", "duration_minutes": 180, "official_question_count": 100, "sample_question_count": 12, "negative_marks": 1, "default_marks": 4, "difficulty": "Medium", "library_key": "management", "sections": ["Quant", "LR", "Language"], "hero": "CMAT practice packs with quick review loops."},
+    {"slug": "snap", "name": "SNAP", "full_name": "Symbiosis National Aptitude Test", "stream": "MBA", "duration_minutes": 60, "official_question_count": 60, "sample_question_count": 12, "negative_marks": 0.25, "default_marks": 1, "difficulty": "Medium", "library_key": "management", "sections": ["English", "Analytical", "Quant"], "hero": "Fast SNAP simulations built for speed and accuracy."},
+    {"slug": "nmat", "name": "NMAT", "full_name": "NMAT by GMAC", "stream": "MBA", "duration_minutes": 120, "official_question_count": 108, "sample_question_count": 12, "negative_marks": 0, "default_marks": 3, "difficulty": "Medium", "library_key": "management", "sections": ["Language", "LR", "Quant"], "hero": "Clean NMAT-style pacing and mock review."},
+    {"slug": "gmat", "name": "GMAT", "full_name": "GMAT Focus Edition", "stream": "Management", "duration_minutes": 135, "official_question_count": 64, "sample_question_count": 10, "negative_marks": 0, "default_marks": 1, "difficulty": "Hard", "library_key": "gmat", "sections": ["Quant", "Verbal", "Data Insights"], "hero": "GMAT-style practice for Indian and global applicants."},
+    {"slug": "gate-cse", "name": "GATE CSE", "full_name": "GATE - Computer Science", "stream": "M.Tech", "duration_minutes": 180, "official_question_count": 65, "sample_question_count": 10, "negative_marks": 0.33, "default_marks": 1, "difficulty": "Hard", "library_key": "gate", "sections": ["GA", "Core", "Math"], "hero": "Core CS mock and PYQ prep for GATE."},
+    {"slug": "gate-da", "name": "GATE DA", "full_name": "GATE - Data Science & AI", "stream": "M.Tech", "duration_minutes": 180, "official_question_count": 65, "sample_question_count": 10, "negative_marks": 0.33, "default_marks": 1, "difficulty": "Hard", "library_key": "gate", "sections": ["GA", "Math", "Data"], "hero": "GATE DA practice with aptitude and data-centric sets."},
+    {"slug": "iit-jam", "name": "IIT JAM", "full_name": "Joint Admission Test for Masters", "stream": "M.Sc", "duration_minutes": 180, "official_question_count": 60, "sample_question_count": 10, "negative_marks": 0.33, "default_marks": 1, "difficulty": "Medium", "library_key": "science", "sections": ["Science", "Math", "Reasoning"], "hero": "JAM-style science practice with review support."},
+    {"slug": "cuet-pg", "name": "CUET PG", "full_name": "Common University Entrance Test - PG", "stream": "University PG", "duration_minutes": 90, "official_question_count": 75, "sample_question_count": 10, "negative_marks": 1, "default_marks": 4, "difficulty": "Medium", "library_key": "science", "sections": ["Domain", "General"], "hero": "CUET PG packs for central university aspirants."},
+    {"slug": "gpat", "name": "GPAT", "full_name": "Graduate Pharmacy Aptitude Test", "stream": "M.Pharm", "duration_minutes": 180, "official_question_count": 125, "sample_question_count": 10, "negative_marks": 1, "default_marks": 4, "difficulty": "Medium", "library_key": "pharma", "sections": ["Pharma", "Chem", "Stats"], "hero": "GPAT practice with pharmacy-first analytics."},
+    {"slug": "clat-pg", "name": "CLAT PG", "full_name": "Common Law Admission Test - PG", "stream": "LL.M", "duration_minutes": 120, "official_question_count": 120, "sample_question_count": 10, "negative_marks": 0.25, "default_marks": 1, "difficulty": "Medium", "library_key": "law", "sections": ["Consti", "Jurisprudence", "Legal Reasoning"], "hero": "CLAT PG full mocks and legal reasoning review."},
 ]
 
 
 def build_questions(exam, label, offset):
     bank = BANKS[exam["library_key"]]
     items = []
-    for index in range(exam["question_count"]):
+    for index in range(exam["sample_question_count"]):
         base = deepcopy(bank[(offset + index) % len(bank)])
         base["question_key"] = f"{exam['slug']}-{label}-{index + 1}"
         base["marks"] = exam["default_marks"]
@@ -139,13 +139,15 @@ class MongoRepository:
         app.config["MONGO_ACTIVE_MODE"] = "mongomock" if self.is_mock else "mongodb"
 
     def seed_database(self):
-        if self.db.exams.count_documents({}):
-            return
         exams, tests, plans = seed_docs()
-        self.db.exams.insert_many(exams)
-        self.db.tests.insert_many(tests)
-        self.db.plans.insert_many(plans)
-        self.db.users.insert_one({"name": "Demo Aspirant", "email": "demo@mockprep.local", "password_hash": generate_password_hash("password123"), "phone": "", "created_at": utcnow()})
+        for exam in exams:
+            self.db.exams.update_one({"slug": exam["slug"]}, {"$set": exam}, upsert=True)
+        for test in tests:
+            self.db.tests.update_one({"slug": test["slug"]}, {"$set": test}, upsert=True)
+        for plan in plans:
+            self.db.plans.update_one({"slug": plan["slug"]}, {"$set": plan}, upsert=True)
+        if not self.db.users.find_one({"email": "demo@mockprep.local"}):
+            self.db.users.insert_one({"name": "Demo Aspirant", "email": "demo@mockprep.local", "password_hash": generate_password_hash("password123"), "phone": "", "created_at": utcnow()})
 
     def create_user(self, name, email, password, phone=""):
         result = self.db.users.insert_one({"name": name, "email": email.lower(), "password_hash": generate_password_hash(password), "phone": phone, "created_at": utcnow()})

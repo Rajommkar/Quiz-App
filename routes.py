@@ -8,6 +8,14 @@ from werkzeug.security import check_password_hash
 from models import repo
 
 main_bp = Blueprint("main", __name__)
+BRAND_NAME = "RankBridge PG Entrance Mock Tests and PYQs"
+
+
+def scaled_duration_minutes(test, exam):
+    official_questions = max(exam.get("official_question_count") or len(test.get("questions", [])), 1)
+    sample_questions = max(len(test.get("questions", [])), 1)
+    scaled_minutes = round((exam["duration_minutes"] * sample_questions) / official_questions)
+    return max(10, scaled_minutes)
 
 
 def normalize(document):
@@ -83,6 +91,9 @@ def build_exam_cards(user=None):
         exam["free_tests"] = sum(1 for item in exam_tests if item.get("is_free"))
         exam["pyq_count"] = sum(1 for item in exam_tests if item["test_type"] == "pyq")
         exam["mock_count"] = sum(1 for item in exam_tests if item["test_type"] == "mock")
+        exam["sample_question_count"] = exam.get("sample_question_count", len(exam_tests[0].get("questions", [])) if exam_tests else 0)
+        sample_test = exam_tests[0] if exam_tests else {"questions": []}
+        exam["sample_duration_minutes"] = scaled_duration_minutes(sample_test, exam) if exam_tests else exam["duration_minutes"]
         exam["access"] = repo.summarize_exam_access(user["id"], exam["slug"]) if user else {"pyq": False, "mock": False, "complete": False}
         exams.append(exam)
     return exams
@@ -109,6 +120,7 @@ def inject_globals():
         "current_user": current_user(),
         "mongo_mode": current_app.config.get("MONGO_ACTIVE_MODE", "mongodb"),
         "whatsapp_href": f"https://wa.me/{current_app.config['WHATSAPP_NUMBER']}?text={current_app.config['WHATSAPP_MESSAGE'].replace(' ', '%20')}",
+        "brand_name": BRAND_NAME,
     }
 
 
@@ -227,7 +239,8 @@ def test_page(test_id):
         flash("This paper is locked. Buy the matching pass to continue.", "warning")
         return redirect(url_for("main.exam_detail", slug=test["exam_slug"]))
     exam = normalize(repo.get_exam(test["exam_slug"]))
-    return render_template("quiz.html", test=test, exam=exam)
+    adaptive_duration_minutes = scaled_duration_minutes(test, exam)
+    return render_template("quiz.html", test=test, exam=exam, adaptive_duration_minutes=adaptive_duration_minutes)
 
 
 @main_bp.route("/api/test/<test_id>")
@@ -240,11 +253,13 @@ def test_api(test_id):
     if not repo.user_has_access(user["id"], test):
         return jsonify({"error": "locked", "redirect": url_for("main.exam_detail", slug=test["exam_slug"])}), 403
     exam = normalize(repo.get_exam(test["exam_slug"]))
+    adaptive_duration_minutes = scaled_duration_minutes(test, exam)
     return jsonify({
         "id": test["id"],
         "title": test["title"],
         "subtitle": test["subtitle"],
         "duration_minutes": test["duration_minutes"],
+        "adaptive_duration_minutes": adaptive_duration_minutes,
         "negative_marks": test["negative_marks"],
         "difficulty": test["difficulty"],
         "instructions": test["instructions"],
